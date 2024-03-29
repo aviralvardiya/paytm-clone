@@ -57,7 +57,7 @@ export default function Page(): JSX.Element {
       <div className={styles.description}>
         <p>
           examples/basic&nbsp;
-          <Code className={styles.code}>web</Code>
+          <Code className={styles.code}>docs</Code>
         </p>
         <div>
           <a
@@ -78,16 +78,17 @@ export default function Page(): JSX.Element {
         </div>
       </div>
 
-      <Button appName="web" className={styles.button}>
+      <Button appName="docs" className={styles.button}>
         Click me!
       </Button>
+      <p className="text-red-500">hello boys!!! this is the user app</p>
 
       <div className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.logos}>
             <div className={styles.circles}>
               <Image
-                alt=""
+                alt="Turborepo"
                 height={614}
                 src="circles.svg"
                 width={614}
@@ -100,7 +101,7 @@ export default function Page(): JSX.Element {
 
             <div className={styles.logo}>
               <Image
-                alt="Turborepo"
+                alt=""
                 height={120}
                 priority
                 src="turborepo.svg"
