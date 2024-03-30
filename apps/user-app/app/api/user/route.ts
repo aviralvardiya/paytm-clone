@@ -13,7 +13,7 @@ export const GET = async () => {
         })
         return NextResponse.json(newUser)
         
-    } catch (error) {
+    } catch (error:any) {
         console.log(error)
         return new Response(error)
     }
