@@ -8,7 +8,9 @@ export const GET = async () => {
         const newUser = await client.user.create({
             data:{
                 name:"ramesh",
-                email:"ramesh@gmail.com"
+                email:"ramesh@gmail.com",
+                number:"123456",
+                password:"aklsudfghasdfg"
             }
         })
         return NextResponse.json(newUser)
