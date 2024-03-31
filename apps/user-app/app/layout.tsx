@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-import {Appbar} from "@repo/ui/Appbar"
+import { Appbar } from "@repo/ui/Appbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={inter.className}>
-          <Appbar onSignin={"klhyfg"} onSignout={"hjkgf"}/>
-          {children}</body>
+        <body className={inter.className}>{children}</body>
       </Providers>
     </html>
   );
