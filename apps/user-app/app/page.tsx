@@ -14,7 +14,7 @@ export default function Page(): JSX.Element {
 
   return (
     <div>
-      <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} />
+      {/* <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} /> */}
       <h1 >Namaste!!</h1>
       
     </div>
