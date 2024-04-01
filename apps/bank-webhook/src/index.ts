@@ -1,8 +1,7 @@
-import { PrismaClient } from "@repo/db/client";
+import prisma from "@repo/db/client";
 import express from "express";
 
 const app = express();
-const client = new PrismaClient();
 
 app.use(express.json());
 
@@ -18,9 +17,10 @@ app.post("/hdfcWebhook", async (req, res) => {
     amount: req.body.amount,
   };
 
+
   try {
-    await client.$transaction([
-      client.balance.update({
+    await prisma.$transaction([
+        prisma.balance.update({
         where: {
           userId: paymentInformation.userId,
         },
@@ -30,7 +30,7 @@ app.post("/hdfcWebhook", async (req, res) => {
           },
         },
       }),
-      client.onRampTransaction.update({
+      prisma.onRampTransaction.update({
         where: {
           token: paymentInformation.token,
         },
