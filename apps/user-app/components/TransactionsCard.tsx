@@ -26,22 +26,22 @@ export async function TransactionsCard({ p2ptransactions }) {
             {p2ptransactions.map((transaction) => {
               if (transaction.fromUserId == session.user.id) {
                 return (
-                  <div className="text-red-500 flex justify-between border-b border-gray-200 items-center p-2">
+                  <div className="text-red-700 flex justify-between border-b border-gray-200 items-center p-2 bg-red-100 my-1 rounded-lg gap-5">
                     <div>
-                      <p>Money sent to {transaction.toUser.name}</p>
+                      <p className=" text-xl">Money sent to {transaction.toUser.name}</p>
                       <p className="text-sm">{transaction.timeStamp.toString().split(" ").slice(0,5).join(" ")}</p>
                     </div>
-                    <div className="font-bold text-xl"> - {transaction.amount / 100}</div>
+                    <div className="font-bold text-2xl"> - {transaction.amount / 100}</div>
                   </div>
                 );
               } else {
                 return (
-                    <div className="text-green-500 flex justify-between border-b border-gray-200 items-center p-2">
+                    <div className="text-green-700 flex justify-between border-b border-gray-200 items-center p-2 bg-green-100 my-1 rounded-lg gap-5">
                     <div>
-                      <p>Money recieved from {transaction.fromUser.name}</p>
+                      <p className="text-xl">Money recieved from {transaction.fromUser.name}</p>
                       <p className="text-sm">{transaction.timeStamp.toString().split(" ").slice(0,5).join(" ")}</p>
                     </div>
-                    <div className="font-bold text-xl"> + {transaction.amount / 100}</div>
+                    <div className="font-bold text-2xl"> + {transaction.amount / 100}</div>
                   </div>
                 );
               }
