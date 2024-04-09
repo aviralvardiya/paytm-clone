@@ -21,6 +21,8 @@ model User {
   password          String
   OnRampTransaction OnRampTransaction[]
   Balance           Balance[]
+  sentTransfers     P2PTransaction[]    @relation(name: "fromUserIdRelation")
+  recievedTransfer  P2PTransaction[]    @relation(name: "toUserIdRelation")
 }
 
 model Merchant {
@@ -47,6 +49,16 @@ model Balance {
   amount Int
   locked Int
   user   User @relation(fields: [userId], references: [id])
+}
+
+model P2PTransaction {
+  id         Int      @unique @default(autoincrement())
+  amount     Int
+  timeStamp  DateTime
+  fromUser   User     @relation(name: "fromUserIdRelation", fields: [fromUserId], references: [id])
+  fromUserId Int
+  toUser     User     @relation(name: "toUserIdRelation", fields: [toUserId], references: [id])
+  toUserId   Int
 }
 
 enum AuthType {
