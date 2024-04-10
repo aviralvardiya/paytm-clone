@@ -13,51 +13,48 @@ export async function p2pTransfer(to: string, amount: number) {
   }
 
   try {
-    
-      const toUser = await prisma.user.findFirst({
-        where: {
-          number: to,
+    const toUser = await prisma.user.findFirst({
+      where: {
+        number: to,
+      },
+    });
+
+    if (!toUser) {
+      return {
+        message: "User not found",
+      };
+    }
+    prisma.$transaction(async (tx) => {
+      await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
+
+      const fromBalance = await tx.balance.findUnique({
+        where: { userId: Number(from) },
+      });
+      if (!fromBalance || fromBalance.amount < amount) {
+        throw new Error("Insufficient funds");
+      }
+      //   await new Promise(r => setTimeout(r, 4000));  //had added this to test two quick requests
+      await tx.balance.update({
+        where: { userId: Number(from) },
+        data: { amount: { decrement: amount } },
+      });
+
+      await tx.balance.update({
+        where: { userId: toUser.id },
+        data: { amount: { increment: amount } },
+      });
+
+      await tx.p2PTransaction.create({
+        data: {
+          amount: amount,
+          fromUserId: Number(from),
+          toUserId: toUser.id,
+          timeStamp: new Date(),
         },
       });
-    
-      if (!toUser) {
-        return {
-          message: "User not found",
-        };
-      }
-      prisma.$transaction(async (tx) => {
-        await tx.$queryRaw`SELECT * FROM "Balance" WHERE "userId" = ${Number(from)} FOR UPDATE`;
-    
-        const fromBalance = await tx.balance.findUnique({
-          where: { userId: Number(from) },
-        });
-        if (!fromBalance || fromBalance.amount < amount) {
-          throw new Error("Insufficient funds");
-        }
-        //   await new Promise(r => setTimeout(r, 4000));  //had added this to test two quick requests
-        await tx.balance.update({
-          where: { userId: Number(from) },
-          data: { amount: { decrement: amount } },
-        });
-    
-        await tx.balance.update({
-          where: { userId: toUser.id },
-          data: { amount: { increment: amount } },
-        });
-    
-        await tx.p2PTransaction.create({
-            data:{
-                amount:amount,
-                fromUserId:Number(from),
-                toUserId:toUser.id,
-                timeStamp: new Date()
-            }
-        })
-      });
-  } catch (error) {
-    console.log(error)
-    return {message:error.message}
-    
+    });
+  } catch (error:any) {
+    console.log(error);
+    return { message: error.message };
   }
-
 }

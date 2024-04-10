@@ -2,7 +2,7 @@
 
 This project is a paytm wallet clone, it is written in TS, uses NextJs as the framework, postgress as database, prisma as teh ORM and uses turborepo to manage the project as a monorepo.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---
 
 # Turborepo starter
 

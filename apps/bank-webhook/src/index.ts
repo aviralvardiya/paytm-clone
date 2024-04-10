@@ -17,10 +17,9 @@ app.post("/hdfcWebhook", async (req, res) => {
     amount: req.body.amount,
   };
 
-
   try {
     await prisma.$transaction([
-        prisma.balance.update({
+      prisma.balance.update({
         where: {
           userId: paymentInformation.userId,
         },
@@ -44,12 +43,11 @@ app.post("/hdfcWebhook", async (req, res) => {
       message: "Captured",
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(411).json({
-        message: "Error while processing at webhook"
-    })
+      message: "Error while processing at webhook",
+    });
   }
-
 });
 
 app.listen(8000, () => {
