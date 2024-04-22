@@ -39,4 +39,4 @@ jobs:
           sudo docker pull rglair/paytm-clone:latest
           sudo docker stop paytm-clone || true
           sudo docker rm paytm-clone || true
-          sudo docker run -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -e NEXTAUTH_URL="${{ secrets.SSH_HOST }}:3005"  -d --name paytm-clone -p 3005:3000 rglair/paytm-clone:latest
+          sudo docker run -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -e NEXTAUTH_URL="http://${{ secrets.SSH_HOST }}:3005"  -d --name paytm-clone -p 3005:3000 rglair/paytm-clone:latest
