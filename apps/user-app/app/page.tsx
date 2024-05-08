@@ -1,15 +1,5 @@
-"use client";
-
-import { Appbar } from "@repo/ui/Appbar";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export default function Page(): JSX.Element {
-  const session = useSession();
-
-  return (
-    <div>
-      {/* <Appbar onSignin={signIn} onSignout={signOut} user={session.data?.user} /> */}
-      <h1>Namaste!!</h1>
-    </div>
-  );
+  redirect("/dashboard");
 }
