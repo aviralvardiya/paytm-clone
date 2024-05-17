@@ -15,8 +15,6 @@ export async function setNameAction(name: string) {
     };
   }
   try {
-    console.log("old session", session.user);
-
     await prisma.user.update({
       where: {
         id: Number(userId),
@@ -25,11 +23,6 @@ export async function setNameAction(name: string) {
         name: name,
       },
     });
-
-    const newSession = await getServerSession(authOptions);
-    console.log("new session", newSession.user);
-
-    // console.log("name set to " + name);
 
     return {
       message: "user's name set successfully",
