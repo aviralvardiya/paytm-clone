@@ -15,8 +15,10 @@ function ShowName() {
   useEffect(() => {
 
     async function getName(){
-        const name = await fetchUserNameAction()
-        setUser({...user,name:name})
+        const {message,name} = await fetchUserNameAction()
+        if(message==="ok"){
+          setUser({...user,name:name})
+        }
     }
 
     getName()

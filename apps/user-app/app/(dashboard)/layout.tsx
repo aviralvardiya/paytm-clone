@@ -7,7 +7,7 @@ export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}): Promise<JSX.Element> {
   const session = await getServerSession(authOptions);
 
   if (session) {

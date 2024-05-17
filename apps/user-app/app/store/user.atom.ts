@@ -1,7 +1,7 @@
 import { atom } from "recoil";
 
 interface UserType {
-  name: string;
+  name: string|undefined;
   email: string;
   id: string;
 }
